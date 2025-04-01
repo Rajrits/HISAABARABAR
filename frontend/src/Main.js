@@ -26,7 +26,7 @@ import { Add as AddIcon, Search as SearchIcon, Delete as DeleteIcon, Login } fro
 
 
 function Main() {
-  const url = "http://localhost:8000/";
+  const url = "https://hisaabarabar.onrender.com/";
   const [expenses, setExpenses] = useState([]);
   const [newExpense, setNewExpense] = useState({
     item: '',
@@ -102,7 +102,7 @@ function Main() {
 
   const handleDeleteConfirm = async() => {
     console.log(deleteDialog.expenseId);
-    await axios.delete(`${url}+${deleteDialog.expenseId}`).then(()=>{
+    await axios.delete(`${url}${deleteDialog.expenseId}`).then(()=>{
       setExpenses(expenses.filter(expense => expense._id !== deleteDialog.expenseId));
       setDeleteDialog({ open: false, expenseId: null, expenseItem: '' });
 

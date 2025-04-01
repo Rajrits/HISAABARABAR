@@ -50,7 +50,7 @@ function Main() {
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
     const cost = parseInt(newExpense.cost);
-    const costPerPerson = Math.ceil(cost / 4); // Assuming 4 people, adjust as needed
+    const costPerPerson = Math.ceil(cost / 4); 
 
     const expense = {
       id: Date.now(),
@@ -68,8 +68,8 @@ function Main() {
       console.log(e);
     })
 
-    setExpenses([...expenses, expense]);
-          console.log(expenses);
+    // setExpenses([...expenses, expense]);
+    //       console.log(expenses);
 
     setNewExpense({ item: '', paidBy: '', cost: '' });
   };
@@ -91,7 +91,7 @@ function Main() {
   },[expenses])
 
   const handleDeleteClick = (id, item) => {
-    console.log(id);
+    
     setDeleteDialog({
       open: true,
       expenseId: id,
@@ -101,7 +101,7 @@ function Main() {
 
 
   const handleDeleteConfirm = async() => {
-    console.log(deleteDialog.expenseId);
+
     await axios.delete(`${url}${deleteDialog.expenseId}`).then(()=>{
       setExpenses(expenses.filter(expense => expense._id !== deleteDialog.expenseId));
       setDeleteDialog({ open: false, expenseId: null, expenseItem: '' });

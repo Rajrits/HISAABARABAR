@@ -27,8 +27,8 @@ import PerPersonHisaab from './components/PerPersonHisaab';
 
 
 function Main() {
-  // const url = "https://hisaabarabar.onrender.com/";
-  const url = "http://localhost:8000/";
+  const url = "https://hisaabarabar.onrender.com/";
+  // const url = "http://localhost:8000/";
   const [expenses, setExpenses] = useState([]);
   const [numberOfPerson,setNumberOfPerson] = useState(4);
   const [newExpense, setNewExpense] = useState({

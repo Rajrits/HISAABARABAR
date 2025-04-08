@@ -23,11 +23,14 @@ import {
   DialogActions,
 } from '@mui/material';
 import { Add as AddIcon, Search as SearchIcon, Delete as DeleteIcon, Login } from '@mui/icons-material';
+import PerPersonHisaab from './components/PerPersonHisaab';
 
 
 function Main() {
-  const url = "https://hisaabarabar.onrender.com/";
+  // const url = "https://hisaabarabar.onrender.com/";
+  const url = "http://localhost:8000/";
   const [expenses, setExpenses] = useState([]);
+  const [numberOfPerson,setNumberOfPerson] = useState(4);
   const [newExpense, setNewExpense] = useState({
     item: '',
     paidBy: '',
@@ -50,7 +53,7 @@ function Main() {
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
     const cost = parseInt(newExpense.cost);
-    const costPerPerson = Math.ceil(cost / 4); 
+    const costPerPerson = Math.ceil(cost / numberOfPerson); 
 
     const expense = {
       id: Date.now(),
@@ -129,18 +132,34 @@ function Main() {
   });
 
   const totalCost = filteredExpenses.reduce((sum, expense) => sum + expense.cost, 0);
-  const totalCostPerPerson = Math.ceil(totalCost / 4); // Assuming 4 people, adjust as needed
-
+  const totalCostPerPerson = Math.ceil(totalCost / numberOfPerson); // Assuming 4 people, adjust as needed
+  // console.log(numberOfPerson);
     return ( 
         <div>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Rishikesh Trip Expenses
+           HISAAB BARABAR
           </Typography>
         </Toolbar>
       </AppBar>
-
+      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Paper sx={{ p: 3, mb: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            Number Of Persons 
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <TextField
+              label="Number of person"
+              value={numberOfPerson}
+              onChange={(e) => setNumberOfPerson(e.target.value)}
+              sx={{ minWidth: 200 }}
+            />
+            
+          
+          </Box>
+        </Paper>
+      </Container>
       <Container maxWidth="lg" sx={{ mt: 4 }}>
         <Paper sx={{ p: 3, mb: 3 }}>
           <Typography variant="h6" gutterBottom>
@@ -269,6 +288,7 @@ function Main() {
             </Grid>
           </Grid>
         </Paper>
+        {/* <PerPersonHisaab/> */}
       </Container>
 
       <Dialog
@@ -294,6 +314,7 @@ function Main() {
           </Button>
         </DialogActions>
       </Dialog>
+      
     </div>
      );
 }
